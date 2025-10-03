@@ -1,0 +1,322 @@
+:root {
+    --color-principal: #6a4a3c;
+    --color-secundario: #f5f5f5;
+    --color-texto: #333;
+    --color-btn: #8b5e47;
+}
+html,body {
+    height: 100%;
+}
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: var(--color-texto);
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    
+}
+main{
+    flex: 1 0 auto;
+}
+
+    
+
+a:hover{
+    border-radius: 5px;
+    background-color: #8b5e47;
+    color: #ffff;
+}
+a:active{
+    border-radius: 10px;
+    background-color: #8b5e47;
+    color: #fff;
+}
+
+a{
+    color: #8b5e47;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+.hidden {
+    display: none;
+}
+
+/* ------------------- Header y navegación ------------------- */
+.header {
+    display: flex;
+    justify-content: space-between; /* Esta propiedad es la que separa el logo del menú. */
+    align-items: center;
+    padding: 1rem;
+    background-color: #e8e8e8;
+    border-bottom: 1px solid #eee;
+    height: 15vh;
+}
+
+.logo img {
+    height: 60px; /* Aquí le das tamaño al logo dentro del header */
+}
+
+.nav-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 1rem;
+    align-items: center; /* Mejor 'center' para centrar verticalmente */
+    justify-content: flex-start; /* Esto alinea el menú dentro de su nav */
+}
+
+.cart-icon {
+    position: relative;
+}
+
+/* ------------------- Hero Banner ------------------- */
+.hero-banner {
+    
+    text-align: center;
+    padding: 6rem 2rem;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../assets/Fotos_hermanos_jota/hero_banner.png');
+    background-size: cover;
+    background-position: center;
+    min-height: 70vh;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.btn:hover {
+    background-color: var(--color-principal);
+}
+
+/* ------------------- Botones y Formularios ------------------- */
+.btn {
+    background-color: var(--color-btn);
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* ------------------- Sección de productos destacados ------------------- */
+.featured-products {
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.featured-title {
+    margin-bottom: 2rem;
+}
+
+/* ESTILO CLAVE: Contenedor para la grilla de productos */
+.products-container {
+     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.product-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    background-color: #fff;
+    padding: 0;
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    /* Las siguientes 3 propiedades son para la disposición interna */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* Propiedad clave para limitar el ancho de la tarjeta */
+    width: 100%; /* Por defecto en móvil */
+    max-width: 300px; /* Limite el tamaño de la tarjeta en escritorios */
+    height: auto;
+    max-height: auto;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.product-card img {
+    width: 50%;
+    height: auto;
+    display: block;
+}
+
+.footer {
+    background-color: var(--color-principal);
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    height: 10vh;
+
+}
+
+.producto-detalle {
+    background-color: #f5f5dc; /* Ligero color beige */
+    border: 1px solid #ddd; /* Un borde sutil */
+    border-radius: 8px; /* Bordes redondeados para la tarjeta */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar un efecto de elevación */
+    padding: 20px; /* Espacio interno */
+    margin-bottom: 20px; /* Espacio entre las tarjetas */
+    display: flexbox; /* Para que la imagen y el texto se acomoden uno al lado del otro */
+    flex-direction: column; /* Para que los elementos se apilen verticalmente */
+    align-items: center; /* Centra el contenido horizontalmente */
+    text-align: center; /* Centra el texto */
+    width: 25%;
+    max-height: 700px ;
+}
+
+.producto-detalle img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px; /* Para que la imagen también tenga los bordes redondeados */
+    margin-bottom: 15px; /* Espacio entre la imagen y el texto */
+}
+.catalogo-header {
+    text-align: center;
+    margin: 2rem 0;
+}
+.catalogo-header input {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 90%; 
+    max-width: 400px; 
+}
+
+/* ------------------- Media Queries (Responsivo) ------------------- */
+/* Telefono */
+.products-container {
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Tablets */
+@media (min-width: 768px) {
+    .products-container {
+        flex-direction: row;
+        justify-content: center;
+    }
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+}
+
+/* Compus */
+@media (min-width: 1024px) {
+    .products-container {
+        justify-content: space-between;
+    }
+
+
+}
+.carrito-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.carrito-item-compacto {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.637);
+  background-color: #ffffff;
+  gap: 20px;
+}
+
+.carrito-item-imagen {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.item-info-compacto h4 {
+  margin: 0 0 5px;
+  font-size: 1.2em;
+}
+
+.item-info-compacto p {
+  margin: 0;
+  color: #777;
+}
+
+
+.resumen-compra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border-top: 2px solid #333;
+}
+
+.resumen-compra p {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.imagen-aleatoria-hero {
+    width: 200px; /* Tamaño de la imagen */
+    height: auto;
+    border-radius: 8px;
+    margin-top: 20px; /* Espacio entre el botón y la imagen */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.header .logo-container {
+    display: flex;
+    align-items: center; /* Centra la imagen y el texto verticalmente */
+    gap: 10px; /* Crea un espacio entre el logo y el texto */
+    text-decoration: none; /* Elimina el subrayado por defecto del enlace */
+    color: var(--color-texto);
+}
+
+.header .logo-container img {
+    height: 60px;
+}
+
+.header .logo-container h1 {
+    font-size: 1.5rem;
+    margin: 0; /* Elimina el margen por defecto del h1 */
+}
