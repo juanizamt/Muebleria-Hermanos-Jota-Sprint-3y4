@@ -296,8 +296,8 @@ h1 {
   font-weight: bold;
 }
 
-.imagen-aleatoria-hero {
-    width: 200px; /* Tamaño de la imagen */
+.product-card .imagen-aleatoria-hero {
+    width: 100px; /* Tamaño de la imagen */
     height: auto;
     border-radius: 8px;
     margin-top: 20px; /* Espacio entre el botón y la imagen */
