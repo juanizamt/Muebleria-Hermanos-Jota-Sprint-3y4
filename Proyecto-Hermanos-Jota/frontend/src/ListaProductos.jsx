@@ -1,6 +1,7 @@
 // frontend/src/ListaProductos.jsx
 
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; 
 
 function ListaProductos() {
     // Estado para almacenar los productos, el estado de carga y posibles errores
@@ -48,23 +49,25 @@ function ListaProductos() {
     // ------------------- Renderizado de la lista de productos -------------------
 
     return (
-        // Usamos la etiqueta 'main' y la clase 'featured-products' para el layout
         <main className="featured-products">
-            <div className="catalogo-header">
-                <h1 className="featured-title">Nuestros Productos Destacados</h1>
-                {/* Aquí podrías añadir un input de búsqueda si es necesario */}
-            </div>
+            {/* ... header del catálogo ... */}
 
-            {/* Contenedor que aplica la grilla CSS */}
             <div className="products-container">
                 {productos.map(producto => (
-                    //'product-card' define la tarjeta visual
-                    <div key={producto.id} className="product-card">
-                        {/* ⚠️ Nota: Asume que tienes un campo 'imagen' en tus datos JSON */}
+                    // 🚨 MODIFICACIÓN CLAVE: Envolver toda la tarjeta en <Link>
+                    // El 'to' apunta a la ruta dinámica que creamos: /producto/ID_DEL_PRODUCTO
+                    <Link 
+                        key={producto.id} 
+                        to={`/producto/${producto.id}`} 
+                        className="product-card"
+                        style={{ textDecoration: 'none', color: 'inherit' }} // Para que no parezca un enlace HTML
+                    >
+                        
+                        {/* El contenido de la tarjeta va dentro del Link */}
                         <img 
-                            className="imagen-aleatoria-hero"
-                            src={producto.imagen || '/assets/Fotos_Hermanos_Jota/mesa_nordica.jpg'} 
+                            src={producto.imagen || 'placeholder.jpg'} 
                             alt={producto.nombre} 
+                            style={{ width: '100%', height: '200px', objectFit: 'cover' }}
                         />
                         
                         <div style={{ padding: '15px' }}>
@@ -73,12 +76,14 @@ function ListaProductos() {
                                 ${producto.precio ? producto.precio.toLocaleString('es-AR') : 'N/A'}
                             </p>
                             
-                            {/* Botón con la clase 'btn' para el estilo */}
-                            <button className="btn" onClick={() => console.log(`Añadir al carrito: ${producto.nombre}`)}>
+                            {/* Opcional: Puedes quitar el botón "Añadir al Carrito" de aquí 
+                                para que solo esté en la página de detalle, o dejarlo si es el diseño original.
+                            <button className="btn" onClick={(e) => { e.preventDefault(); console.log('Añadir al carrito...') }}>
                                 Añadir al Carrito
-                            </button>
+                            </button> 
+                            */}
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </main>

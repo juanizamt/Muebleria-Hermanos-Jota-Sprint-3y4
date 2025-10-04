@@ -320,3 +320,61 @@ h1 {
     font-size: 1.5rem;
     margin: 0; /* Elimina el margen por defecto del h1 */
 }
+
+.producto-detalle-imagen {
+    /* Altura máxima para que la imagen sea grande pero controlada */
+    max-height: 450px; 
+    /* Aseguramos que ocupe todo el ancho de su columna */
+    width: 100%; 
+    /* Le indicamos al navegador que mantenga la proporción y recorte si es necesario */
+    object-fit: cover; 
+    /* Forzamos la visualización, solo por seguridad */
+    display: block; 
+}
+
+/* Regla para el contenedor flex si es necesario un espacio */
+.producto-detalle {
+    /* Si tienes una regla display: flex; aquí, genial. */
+    align-items: flex-start; /* Asegura que la imagen no se comprima */
+}
+
+.producto-detalle .image-column-override {
+    min-width: 400px !important; 
+    flex-basis: 50% !important;
+}
+
+/* 🚨 1. ANCHO Y FLEX DEL CONTENEDOR PRINCIPAL (Para garantizar espacio) 🚨 */
+.producto-detalle {
+    /* Mantenemos el diseño Flexbox */
+    display: flex; 
+    /* Si el ancho total es muy pequeño, garantizamos un mínimo visible */
+    min-width: 700px; 
+    /* Centramos el contenido */
+    margin: 0 auto;
+    /* Ajustamos el padding para que no se pegue */
+    padding: 30px 20px;
+}
+
+/* 🚨 2. CONTROL TOTAL DE LA COLUMNA DE LA IMAGEN 🚨 */
+.producto-detalle .image-column {
+    /* Forzamos al 50% y prohibimos que se encoja o crezca */
+    flex: 0 0 50%; 
+    /* Si el 50% es muy poco, al menos tendrá este ancho */
+    min-width: 350px; 
+}
+
+/* 3. ESTILOS DE LA IMAGEN DENTRO DE LA COLUMNA */
+.producto-detalle-imagen {
+    width: 100%;
+    height: 450px; /* Altura que ya probamos que funciona */
+    object-fit: cover;
+    display: block; /* Necesario para que el width/height funcione bien */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* 4. ESTILO DE LA COLUMNA DE INFORMACIÓN (para que ocupe el otro 50%) */
+.producto-detalle .info-column {
+    flex: 1 1 50%; 
+    padding-left: 20px;
+}
