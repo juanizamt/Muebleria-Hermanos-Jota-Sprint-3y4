@@ -1,54 +1,96 @@
-// frontend/src/App.jsx
+import React, { useState, useEffect } from 'react';
+import Navbar from './components/Navbar';
+import ProductList from './components/ProductList';
+import ProductDetail from './components/ProductDetail'; 
+import ContactForm from './components/ContactForm';
+import Footer from './components/Footer';
 
-import React from 'react';
-import ListaProductos from './ListaProductos.jsx'; 
-// Importamos el componente que ya funciona
+const VIEWS = {
+  CATALOG: 'catalog',
+  DETAIL: 'detail',
+  CONTACT: 'contact',
+};
 
 function App() {
+  const [products, setProducts] = useState([]); 
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
+  const [currentView, setCurrentView] = useState(VIEWS.CATALOG);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  
+  const [cart, setCart] = useState([]);
+
+  const handleSelectProduct = (productData) => {
+    setSelectedProduct(productData);
+    setCurrentView(VIEWS.DETAIL);
+  };
+  
+  const handleBackToCatalog = () => {
+    setSelectedProduct(null);
+    setCurrentView(VIEWS.CATALOG);
+  };
+  
+  const handleAddToCart = (product) => {
+    setCart(prevCart => [...prevCart, product]);
+  };
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/api/productos'); 
+
+        if (!response.ok) {
+          throw new Error('Error al cargar los productos');
+        }
+
+        const data = await response.json();
+        setProducts(data);
+
+      } catch (err) {
+        setError('Error al cargar los productos');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  let content;
+
+  if (loading) {
+    content = <div>Cargando...</div>;
+  } else if (error) {
+    content = <div>{error}</div>; 
+  } else if (currentView === VIEWS.DETAIL && selectedProduct) {
+    content = (
+        <ProductDetail 
+            product={selectedProduct} 
+            onAddToCart={handleAddToCart}
+            onBackToCatalog={handleBackToCatalog}
+        />
+    );
+  } else if (currentView === VIEWS.CONTACT) {
+    content = (
+      <>
+        <h1 className="catalogo-header">Contacto</h1>
+        <ContactForm />
+      </>
+    );
+  } else {
+    content = (
+      <>
+        <h1 className="catalogo-header">Catálogo de Productos</h1>
+        <ProductList products={products} onSelectProduct={handleSelectProduct} />
+      </>
+    );
+  }
+
   return (
-    // Usamos el fragmento <> </> como contenedor principal
-    <>
-      {/* ------------------- HEADER (Menú, Logo, Carrito) ------------------- */}
-      <header className="header">
-        <a href="/" className="logo-container">
-          {/* Asume que tienes un logo en assets */}
-          <img src="/assets/Fotos_Hermanos_Jota/logo.png" alt="Logo Hermanos Jota" /> 
-          <h1>Hermanos Jota</h1>
-        </a>
-        <nav className="nav-menu">
-          <ul>
-            <li><a href="/">Inicio</a></li>
-            <li><a href="/catalogo">Catálogo</a></li>
-            <li><a href="/contacto">Contacto</a></li>
-            <li className="cart-icon">
-              {/* Aquí iría el contador de carrito */}
-              <a href="/carrito">🛒 (0)</a>
-            </li>
-          </ul>
-        </nav>
-      </header>
-
-      {/* ------------------- HERO BANNER (La sección grande inicial) ------------------- */}
-      {/* 💡 Lo incluimos aquí aunque no se use en la vista de catálogo, para replicar tu HTML */}
-      <section className="hero-banner">
-        <div className="hero-content">
-          <h1>Muebles con Historia y Estilo</h1>
-          <p>Encuentra piezas únicas para tu hogar o negocio.</p>
-          <a href="/catalogo" className="btn">Ver Catálogo</a>
-        </div>
-      </section>
-
-      {/* ------------------- MAIN CONTENT: LISTA DE PRODUCTOS ------------------- */}
-      {/* Aquí es donde renderizamos el componente de productos */}
-      <main>
-        <ListaProductos />
-      </main>
-
-      {/* ------------------- FOOTER (Pie de Página) ------------------- */}
-      <footer className="footer">
-        <p>© {new Date().getFullYear()} Mueblería Hermanos Jota. Todos los derechos reservados.</p>
-      </footer>
-    </>
+    <div className="App">
+      <ProductList />
+    </div>
   );
 }
 
