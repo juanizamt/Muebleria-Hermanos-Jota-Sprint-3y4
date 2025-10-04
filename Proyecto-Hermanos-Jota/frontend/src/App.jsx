@@ -1,54 +1,84 @@
 // frontend/src/App.jsx
 
 import React from 'react';
+// Importamos las herramientas de routing
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+
+// Importamos los componentes
 import ListaProductos from './ListaProductos.jsx'; 
-// Importamos el componente que ya funciona
+import Contacto from './Contacto.jsx';
+import Carrito from './Carrito.jsx';
+
+// El componente Home contendrá el Hero Banner y los Productos
+const Home = () => (
+    <>
+        {/* HERO BANNER (solo se muestra en la página de inicio) */}
+        <section className="hero-banner">
+            <div className="hero-content">
+                <h1>Muebles con Historia y Estilo</h1>
+                <p>Encuentra piezas únicas para tu hogar o negocio.</p>
+                <Link to="/catalogo" className="btn">Ver Catálogo</Link>
+            </div>
+        </section>
+        
+        {/* PRODUCTOS DESTACADOS / CATÁLOGO */}
+        <main>
+             <ListaProductos />
+        </main>
+    </>
+);
+
 
 function App() {
   return (
-    // Usamos el fragmento <> </> como contenedor principal
-    <>
+    // 1. Envolvemos toda la aplicación en el Router
+    <Router>
+      
       {/* ------------------- HEADER (Menú, Logo, Carrito) ------------------- */}
       <header className="header">
-        <a href="/" className="logo-container">
-          {/* Asume que tienes un logo en assets */}
-          <img src="/assets/Fotos_Hermanos_Jota/logo.png" alt="Logo Hermanos Jota" /> 
+        <Link to="/" className="logo-container"> 
+          <img src="../assets/Fotos_Hermanos_Jota/logo.png" alt="Logo Hermanos Jota" /> 
           <h1>Hermanos Jota</h1>
-        </a>
+        </Link>
         <nav className="nav-menu">
           <ul>
-            <li><a href="/">Inicio</a></li>
-            <li><a href="/catalogo">Catálogo</a></li>
-            <li><a href="/contacto">Contacto</a></li>
+            {/* 2. Sustituimos las etiquetas <a> por el componente <Link> de React Router */}
+            <li><Link to="/">Inicio</Link></li>
+            <li><Link to="/catalogo">Catálogo</Link></li>
+            <li><Link to="/contacto">Contacto</Link></li>
             <li className="cart-icon">
-              {/* Aquí iría el contador de carrito */}
-              <a href="/carrito">🛒 (0)</a>
+              <Link to="/carrito">🛒 (0)</Link>
             </li>
           </ul>
         </nav>
       </header>
 
-      {/* ------------------- HERO BANNER (La sección grande inicial) ------------------- */}
-      {/* 💡 Lo incluimos aquí aunque no se use en la vista de catálogo, para replicar tu HTML */}
-      <section className="hero-banner">
-        <div className="hero-content">
-          <h1>Muebles con Historia y Estilo</h1>
-          <p>Encuentra piezas únicas para tu hogar o negocio.</p>
-          <a href="/catalogo" className="btn">Ver Catálogo</a>
-        </div>
-      </section>
+      {/* ------------------- CONTENEDOR DE RUTAS ------------------- */}
+      <div style={{minHeight: '80vh'}}> 
+        <Routes>
+            {/* La ruta principal '/' muestra el Home (Hero + Productos) */}
+            <Route path="/" element={<Home />} />
+            
+            {/* La ruta '/catalogo' muestra solo la lista de productos (solo el main) */}
+            {/* Si quieres que solo se muestre el catálogo sin el hero banner, sería así: */}
+            <Route path="/catalogo" element={<main><ListaProductos /></main>} />
+            
+            {/* La ruta '/contacto' muestra el componente Contacto */}
+            <Route path="/contacto" element={<Contacto />} />
+            
+            {/* La ruta '/carrito' muestra el componente Carrito */}
+            <Route path="/carrito" element={<Carrito />} />
+            
+            {/* Agregaremos una ruta para el detalle del producto más tarde */}
+        </Routes>
+      </div>
 
-      {/* ------------------- MAIN CONTENT: LISTA DE PRODUCTOS ------------------- */}
-      {/* Aquí es donde renderizamos el componente de productos */}
-      <main>
-        <ListaProductos />
-      </main>
 
       {/* ------------------- FOOTER (Pie de Página) ------------------- */}
       <footer className="footer">
         <p>© {new Date().getFullYear()} Mueblería Hermanos Jota. Todos los derechos reservados.</p>
       </footer>
-    </>
+    </Router>
   );
 }
 

@@ -58,7 +58,7 @@ function ListaProductos() {
             {/* Contenedor que aplica la grilla CSS */}
             <div className="products-container">
                 {productos.map(producto => (
-                    // La clase 'product-card' define la tarjeta visual
+                    //'product-card' define la tarjeta visual
                     <div key={producto.id} className="product-card">
                         {/* ⚠️ Nota: Asume que tienes un campo 'imagen' en tus datos JSON */}
                         <img 
