@@ -1,8 +1,12 @@
 const express = require('express');
+const cors = require('cors'); // <-- Nuevo: Importar cors
 const productosRouter = require('./routes/productos');
 
 const app = express();
 const PORT = 3001;
+
+// Configuración de CORS: Permite que cualquier origen (tu frontend) acceda a la API
+app.use(cors()); // <-- Nuevo: Usar el middleware de cors
 
 app.use(express.json());
 app.use((req, res, next) => {
