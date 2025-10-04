@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import ListaProductos from './ListaProductos.jsx'; 
 import Contacto from './Contacto.jsx';
 import Carrito from './Carrito.jsx';
+import ProductoDetalle from './ProductoDetalle.jsx';
 
 // El componente Home contendrá el Hero Banner y los Productos
 const Home = () => (
@@ -37,7 +38,10 @@ function App() {
       {/* ------------------- HEADER (Menú, Logo, Carrito) ------------------- */}
       <header className="header">
         <Link to="/" className="logo-container"> 
-          <img src="../assets/Fotos_Hermanos_Jota/logo.png" alt="Logo Hermanos Jota" /> 
+          <img src="./assets/Fotos_Hermanos_Jota/logo.svg" 
+          alt="Logo Hermanos Jota" 
+          style={{ width: '60px', height: '60px', display: 'block', backgroundColor: 'red' }} /> 
+          
           <h1>Hermanos Jota</h1>
         </Link>
         <nav className="nav-menu">
@@ -69,7 +73,8 @@ function App() {
             {/* La ruta '/carrito' muestra el componente Carrito */}
             <Route path="/carrito" element={<Carrito />} />
             
-            {/* Agregaremos una ruta para el detalle del producto más tarde */}
+            <Route path="/producto/:id" element={<ProductoDetalle />} /> 
+            
         </Routes>
       </div>
 
