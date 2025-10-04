@@ -1,6 +1,6 @@
 const express = require('express');
 
-const productosRouter = require('./routes/productos');
+const productosRouter = require('./routes/productos_busqueda'); 
 const cors = require ('cors');
 
 const app = express();
