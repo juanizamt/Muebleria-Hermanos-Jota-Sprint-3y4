@@ -3,10 +3,6 @@
 import React, { useState } from 'react'; 
 import { Link } from 'react-router-dom';
 
-// 🚨 ELIMINA: La importación 'addToCart' aquí si es que la tenías. Solo se necesita en App.jsx.
-// (Asumo que ya tienes la lógica de App.jsx funcionando correctamente)
-
-// Asegúrate de que este componente reciba 'addToCart' para aumentar la cantidad
 function Carrito({ cart, totalPrice, removeFromCart, clearCart, addToCart }) {
 
     const [compraExitosa, setCompraExitosa] = useState(false);
@@ -28,14 +24,16 @@ function Carrito({ cart, totalPrice, removeFromCart, clearCart, addToCart }) {
     if (compraExitosa) {
         return (
             <main className="cart-empty-state">
-                {/* Usamos la clase que ya existía, pero ajustamos el estilo para centrarlo estáticamente */}
-                <div className="cart-confirmation-message" style={{position: 'static', transform: 'none', margin: '0 auto'}}>
+                {/* 🚨 CLASE AÑADIDA */}
+                <div className="cart-confirmation-message cart-confirmation-message-static"> 
                     🎉 ¡Gracias por tu compra! El pedido ha sido procesado con éxito.
                 </div>
                 <h2>🛒 Carrito de Compras</h2>
                 <hr />
-                <p style={{marginTop: '20px'}}>Tu carrito está ahora vacío.</p>
-                <Link to="/catalogo" className="btn" style={{ marginTop: '20px' }}>
+                {/* 🚨 CLASE AÑADIDA */}
+                <p className="cart-empty-state-margin-top">Tu carrito está ahora vacío.</p>
+                {/* 🚨 CLASE AÑADIDA */}
+                <Link to="/catalogo" className="btn cart-empty-state-margin-top">
                     Seguir Comprando
                 </Link>
             </main>
@@ -49,7 +47,8 @@ function Carrito({ cart, totalPrice, removeFromCart, clearCart, addToCart }) {
                 <h2>🛒 Carrito de Compras</h2>
                 <hr />
                 <p>Tu carrito está vacío. ¡Empieza a llenarlo con nuestros increíbles productos!</p>
-                <Link to="/catalogo" className="btn" style={{ marginTop: '20px' }}>
+                {/* 🚨 CLASE AÑADIDA */}
+                <Link to="/catalogo" className="btn cart-empty-state-margin-top">
                     Ver Catálogo
                 </Link>
             </main>
@@ -60,14 +59,15 @@ function Carrito({ cart, totalPrice, removeFromCart, clearCart, addToCart }) {
     // ------------------- Renderizado de Carrito Lleno -------------------
 
     return (
-        <main style={{ padding: '40px' }}>
+        <main className="cart-main-padded"> {/* 🚨 CLASE AÑADIDA */}
             <h2>🛒 Tu Carrito</h2>
             <hr />
 
-            <div className="cart-content-wrapper" style={{ display: 'flex', gap: '30px' }}>
+            {/* 🚨 CLASE AÑADIDA */}
+            <div className="cart-columns"> 
                 
                 {/* COLUMNA DE ÍTEMS */}
-                <div className="cart-items" style={{ flex: '3' }}>
+                <div className="cart-items cart-items-column"> {/* 🚨 CLASE AÑADIDA */}
                     {cart.map(item => (
                         <div key={item.id} className="cart-item">
                             <img 
@@ -80,7 +80,7 @@ function Carrito({ cart, totalPrice, removeFromCart, clearCart, addToCart }) {
                                 <p>Cantidad: <strong>{item.quantity}</strong></p>
                                 
                                 {/* Botones de cantidad y borrado */}
-                                <div style={{marginTop: '10px'}}>
+                                <div className="qty-controls-wrapper"> {/* 🚨 CLASE AÑADIDA */}
                                     <button 
                                         onClick={() => addToCart(item)} 
                                         className="btn-qty-control">+</button>
@@ -98,10 +98,12 @@ function Carrito({ cart, totalPrice, removeFromCart, clearCart, addToCart }) {
                                 </div>
                             </div>
                             <div className="cart-item-price">
-                                <p style={{ fontWeight: 'bold' }}>
+                                {/* 🚨 CLASE AÑADIDA */}
+                                <p className="cart-item-price-total"> 
                                     $ {(item.precio * item.quantity).toFixed(2)}
                                 </p>
-                                <p style={{ color: '#888' }}>($ {item.precio.toFixed(2)} c/u)</p>
+                                {/* 🚨 CLASE AÑADIDA */}
+                                <p className="cart-item-price-unit">($ {item.precio.toFixed(2)} c/u)</p>
                             </div>
                         </div>
                     ))}
@@ -123,16 +125,18 @@ function Carrito({ cart, totalPrice, removeFromCart, clearCart, addToCart }) {
                         <p>${totalPrice}</p>
                     </div>
                     
-                    <div className="cart-total-row" style={{borderTop: 'none'}}>
+                    {/* 🚨 CLASE AÑADIDA */}
+                    <div className="cart-total-row cart-total-row-no-border">
                         <h4>Total a Pagar:</h4>
-                        <h4 style={{ color: '#0066cc' }}>$ {totalPrice}</h4>
+                        {/* 🚨 CLASE AÑADIDA */}
+                        <h4 className="cart-final-total-color">$ {totalPrice}</h4>
                     </div>
                     
                     {/* Botón de Finalizar Compra */}
                     <button 
-                        className="btn" 
+                        className="btn btn-checkout" // 🚨 CLASE AÑADIDA
                         onClick={handleCheckout} 
-                        style={{ width: '100%', padding: '15px' }}>
+                    >
                         Finalizar Compra
                     </button>
                 </div>

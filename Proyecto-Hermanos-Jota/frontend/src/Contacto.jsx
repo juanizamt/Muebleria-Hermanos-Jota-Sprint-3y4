@@ -3,8 +3,6 @@
 import React, { useState } from 'react';
 
 function Contacto() {
-    // 1. Estado para almacenar los datos del formulario. 
-    // Los campos deben coincidir con los atributos 'name' de los inputs.
     const [formData, setFormData] = useState({
         nombre: '',
         email: '',
@@ -12,30 +10,23 @@ function Contacto() {
         mensaje: ''
     });
 
-    // Estado para manejar el mensaje de éxito después del envío
     const [mensajeEnvio, setMensajeEnvio] = useState('');
 
-    // 2. Función genérica para manejar el cambio en cualquier input
-    // Actualiza el estado 'formData' manteniendo los campos existentes (spread operator: ...formData)
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
             ...prevState,
-            [name]: value // [name] es la clave dinámica (nombre, email, etc.)
+            [name]: value
         }));
     };
 
-    // 3. Función para manejar el envío del formulario
     const handleSubmit = (e) => {
-        e.preventDefault(); // Detiene el comportamiento por defecto de recargar la página
-
-        //Imprime el objeto de estado completo en la consola
+        e.preventDefault(); 
+        
         console.log("Datos del formulario enviados:", formData);
 
-        //Muestra un mensaje de éxito en la UI
         setMensajeEnvio("✅ ¡Mensaje enviado con éxito! Revisaremos tu consulta pronto.");
 
-        // Opcional: Limpiar el formulario después del envío
         setFormData({
             nombre: '',
             email: '',
@@ -45,31 +36,23 @@ function Contacto() {
     };
 
     return (
-        <main className="featured-products" style={{ padding: '2rem' }}>
+        <main className="featured-products contact-main-padded"> {/* 🚨 CLASE AÑADIDA */}
             <h1 className="featured-title">Contactanos</h1>
-            <p style={{ textAlign: 'center', marginBottom: '2rem' }}>
+            <p className="contact-intro-text"> {/* 🚨 CLASE AÑADIDA */}
                 Tenes alguna pregunta? Envíanos un mensaje.
             </p>
 
             {/* Mensaje de éxito visible */}
             {mensajeEnvio && (
-                <div style={{ 
-                    textAlign: 'center', 
-                    color: 'green', 
-                    padding: '1rem', 
-                    marginBottom: '1rem',
-                    border: '1px solid green',
-                    borderRadius: '5px'
-                }}>
+                <div className="success-message-box"> {/* 🚨 CLASE AÑADIDA */}
                     {mensajeEnvio}
                 </div>
             )}
 
             
             <form 
-                className="producto-detalle" 
+                className="contact-form" // 🚨 CLASE AÑADIDA
                 onSubmit={handleSubmit} 
-                style={{ margin: '0 auto', maxWidth: '450px', display: 'flex', flexDirection: 'column', gap: '15px' }}
             >
                 {/* Campo Nombre */}
                 <div>
@@ -79,9 +62,9 @@ function Contacto() {
                         id="nombre"
                         name="nombre"
                         value={formData.nombre} 
-                        onChange={handleChange} // El cambio actualiza el estado
+                        onChange={handleChange}
                         required
-                        style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
+                        className="form-input-field" // 🚨 CLASE AÑADIDA
                     />
                 </div>
 
@@ -95,7 +78,7 @@ function Contacto() {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
+                        className="form-input-field" // 🚨 CLASE AÑADIDA
                     />
                 </div>
                 
@@ -108,7 +91,7 @@ function Contacto() {
                         name="telefono"
                         value={formData.telefono}
                         onChange={handleChange}
-                        style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
+                        className="form-input-field" // 🚨 CLASE AÑADIDA
                     />
                 </div>
 
@@ -122,12 +105,12 @@ function Contacto() {
                         value={formData.mensaje}
                         onChange={handleChange}
                         required
-                        style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
+                        className="form-input-field" // 🚨 CLASE AÑADIDA
                     ></textarea>
                 </div>
 
-          
-                <button type="submit" className="btn" style={{ marginTop: '10px' }}>
+            
+                <button type="submit" className="btn btn-submit-margin"> {/* 🚨 CLASE AÑADIDA */}
                     Enviar Consulta
                 </button>
             </form>

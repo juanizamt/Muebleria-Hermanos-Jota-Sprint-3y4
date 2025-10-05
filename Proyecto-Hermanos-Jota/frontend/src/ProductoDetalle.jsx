@@ -3,9 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
-// 🚨 NO ES NECESARIO ELIMINAR EL MENSAJEESTILO DE AQUÍ
-// El error de definición se arregló antes, pero lo eliminaremos al final.
-
 function ProductoDetalle({ addToCart }) { 
     const { id } = useParams(); 
     
@@ -13,7 +10,6 @@ function ProductoDetalle({ addToCart }) {
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState(null);
     
-    // Estado para controlar la visibilidad del mensaje
     const [mensajeVisible, setMensajeVisible] = useState(false);
 
     useEffect(() => {
@@ -37,16 +33,11 @@ function ProductoDetalle({ addToCart }) {
             });
     }, [id]); 
     
-    // Función que maneja la adición y el mensaje de confirmación
     const handleAddToCart = () => {
         if (producto) {
-            // 1. Ejecuta la lógica central del carrito
             addToCart(producto); 
-            
-            // 2. Muestra el mensaje de confirmación
             setMensajeVisible(true);
             
-            // 3. Oculta el mensaje después de 3 segundos (3000 ms)
             setTimeout(() => {
                 setMensajeVisible(false);
             }, 3000);
@@ -71,13 +62,13 @@ function ProductoDetalle({ addToCart }) {
     // ------------------- Renderizado del producto -------------------
     return (
         <main className="featured-products"> 
-            <div className="catalogo-header">
-                 <Link to="/catalogo" className="btn" style={{marginBottom: '20px'}}>
+            {/* 🚨 Usamos la nueva clase para el contenedor del botón */}
+            <div className="catalogo-header catalogo-header-flex"> 
+                 <Link to="/catalogo" className="btn">
                     ← Volver al Catálogo
                  </Link>
             </div>
             
-            {/* 🚨 AHORA USA LA CLASE DE CSS */}
             {mensajeVisible && (
                 <div className="cart-confirmation-message">
                     ✅ ¡**{producto.nombre}** añadido al carrito!
@@ -85,13 +76,9 @@ function ProductoDetalle({ addToCart }) {
             )}
             
 
-            {/* Contenedor de Detalle */}
-            <div 
-                className="producto-detalle" 
+            {/* Contenedor de Detalle (sin estilos en línea) */}
+            <div className="producto-detalle">
                 
-            >
-                
-                {/* Columna de Imagen */}
                 <div className="image-column">
                     <img 
                         src={producto.imagen || '/assets/Fotos_Hermanos_Jota/placeholder.jpg'} 
@@ -100,23 +87,24 @@ function ProductoDetalle({ addToCart }) {
                     />
                 </div>
                 
-                {/* Columna de Información */}
-                <div className="info-column"> {/* Usamos la clase info-column */}
-                    <h1 style={{ color: '#333' }}>{producto.nombre}</h1>
+                <div className="info-column"> 
+                    {/* El estilo del h1 ya está en tu CSS principal */}
+                    <h1>{producto.nombre}</h1>
                     
-                    <p style={{ fontSize: '2em', fontWeight: 'bold', color: '#8b5e47', margin: '15px 0' }}>
+                    {/* 🚨 Clase añadida aquí */}
+                    <p className="product-detail-price">
                         $ {producto.precio ? producto.precio.toLocaleString('es-AR') : 'Precio no disponible'}
                     </p>
                     
-                    <p style={{ lineHeight: '1.6', color: '#555' }}>
+                    {/* 🚨 Clase añadida aquí */}
+                    <p className="product-detail-description">
                         {producto.descripcion || 'Descripción detallada del producto no disponible.'}
                     </p>
                     
                     {/* Botón para Carrito */}
                     <button 
-                        className="btn" 
+                        className="btn btn-add-to-cart-detail" // 🚨 Clase añadida aquí
                         onClick={handleAddToCart}
-                        style={{ marginTop: '30px', padding: '12px 25px', fontSize: '1.1em' }}
                     >
                         Añadir al Carrito
                     </button>
@@ -128,5 +116,3 @@ function ProductoDetalle({ addToCart }) {
 }
 
 export default ProductoDetalle;
-
-// 🚨 ELIMINA CUALQUIER DEFINICIÓN DE 'mensajeEstilo' QUE ESTUVIERA AQUÍ ABAJO
