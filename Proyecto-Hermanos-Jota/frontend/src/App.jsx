@@ -1,90 +1,136 @@
 // frontend/src/App.jsx
 
-import React from 'react';
-// Importamos las herramientas de routing
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
-// Importamos los componentes
-import ListaProductos from './ListaProductos.jsx'; 
-import Contacto from './Contacto.jsx';
-import Carrito from './Carrito.jsx';
+// 🚨 IMPORTANTE: Se elimina la importación de Home.jsx
+import ListaProductos from './ListaProductos.jsx';
 import ProductoDetalle from './ProductoDetalle.jsx';
+import Carrito from './Carrito.jsx'; 
+import Contacto from './Contacto.jsx'; 
 
-// El componente Home contendrá el Hero Banner y los Productos
-const Home = () => (
-    <>
-        {/* HERO BANNER (solo se muestra en la página de inicio) */}
-        <section className="hero-banner">
+// Componente para mostrar el Hero Banner en la ruta principal (/)
+// Esto asegura que la lógica del Catálogo quede solo en /catalogo
+const HeroPage = () => (
+    <main>
+        <div className="hero-banner">
             <div className="hero-content">
-                <h1>Muebles con Historia y Estilo</h1>
-                <p>Encuentra piezas únicas para tu hogar o negocio.</p>
+                <h1>¡Bienvenidos a Hermanos Jota!</h1>
+                <p>Tu tienda de muebles de diseño y calidad. Descubre nuestras últimas colecciones.</p>
                 <Link to="/catalogo" className="btn">Ver Catálogo</Link>
             </div>
-        </section>
-        
-        {/* PRODUCTOS DESTACADOS / CATÁLOGO */}
-        <main>
-             <ListaProductos />
-        </main>
-    </>
+        </div>
+    </main>
 );
 
 
 function App() {
-  return (
-    // 1. Envolvemos toda la aplicación en el Router
-    <Router>
-      
-      {/* ------------------- HEADER (Menú, Logo, Carrito) ------------------- */}
-      <header className="header">
-        <Link to="/" className="logo-container"> 
-          <img src="./assets/Fotos_Hermanos_Jota/logo.svg" 
-          alt="Logo Hermanos Jota" 
-          style={{ width: '60px', height: '60px', display: 'block', backgroundColor: 'red' }} /> 
-          
-          <h1>Hermanos Jota</h1>
-        </Link>
-        <nav className="nav-menu">
-          <ul>
-            {/* 2. Sustituimos las etiquetas <a> por el componente <Link> de React Router */}
-            <li><Link to="/">Inicio</Link></li>
-            <li><Link to="/catalogo">Catálogo</Link></li>
-            <li><Link to="/contacto">Contacto</Link></li>
-            <li className="cart-icon">
-              <Link to="/carrito">🛒 (0)</Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
+    // 1. ESTADO GLOBAL DEL CARRITO
+    const [cart, setCart] = useState([]); 
 
-      {/* ------------------- CONTENEDOR DE RUTAS ------------------- */}
-      <div style={{minHeight: '80vh'}}> 
-        <Routes>
-            {/* La ruta principal '/' muestra el Home (Hero + Productos) */}
-            <Route path="/" element={<Home />} />
-            
-            {/* La ruta '/catalogo' muestra solo la lista de productos (solo el main) */}
-            {/* Si quieres que solo se muestre el catálogo sin el hero banner, sería así: */}
-            <Route path="/catalogo" element={<main><ListaProductos /></main>} />
-            
-            {/* La ruta '/contacto' muestra el componente Contacto */}
-            <Route path="/contacto" element={<Contacto />} />
-            
-            {/* La ruta '/carrito' muestra el componente Carrito */}
-            <Route path="/carrito" element={<Carrito />} />
-            
-            <Route path="/producto/:id" element={<ProductoDetalle />} /> 
-            
-        </Routes>
-      </div>
+    // 2. FUNCIONES DE GESTIÓN DEL CARRITO
+    
+    const addToCart = (productToAdd) => {
+        const existingItem = cart.find(item => item.id === productToAdd.id);
+        const price = Number(productToAdd.precio); 
 
+        if (existingItem) {
+            setCart(
+                cart.map(item =>
+                    item.id === productToAdd.id
+                        ? { ...item, quantity: item.quantity + 1 } 
+                        : item
+                )
+            );
+        } else {
+            setCart([...cart, { ...productToAdd, quantity: 1, precio: price }]);
+        }
+    };
 
-      {/* ------------------- FOOTER (Pie de Página) ------------------- */}
-      <footer className="footer">
-        <p>© {new Date().getFullYear()} Mueblería Hermanos Jota. Todos los derechos reservados.</p>
-      </footer>
-    </Router>
-  );
+    const removeFromCart = (productId, removeAll = false) => {
+        setCart(currentCart => {
+            const existingItem = currentCart.find(item => item.id === productId);
+            if (!existingItem) return currentCart;
+
+            if (removeAll || existingItem.quantity === 1) {
+                return currentCart.filter(item => item.id !== productId);
+            } else {
+                return currentCart.map(item =>
+                    item.id === productId
+                        ? { ...item, quantity: item.quantity - 1 }
+                        : item
+                );
+            }
+        });
+    };
+    
+    const clearCart = () => {
+        setCart([]);
+    };
+
+    // 3. CÁLCULO DE VALORES
+    const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
+
+    const totalPrice = cart.reduce(
+        (total, item) => total + (item.precio * item.quantity), 
+        0
+    ).toFixed(2); 
+
+    // ESTRUCTURA Y RUTAS
+    return (
+        <Router>
+            {/* ESTRUCTURA HTML BÁSICA PARA HEADER */}
+            <header className="header">
+                <div className="logo-container">
+                    <img src="/assets/Fotos_Hermanos_Jota/logo.svg" alt="Hermanos Jota Logo" />
+                    <h1>Hermanos Jota</h1>
+                </div>
+                <nav className="nav-menu">
+                    <ul>
+                        <li><Link to="/">Inicio</Link></li>
+                        <li><Link to="/catalogo">Catálogo</Link></li>
+                        <li><Link to="/contacto">Contacto</Link></li>
+                        <li>
+                            <Link to="/carrito" className="cart-icon">
+                                Carrito ({cartItemCount})
+                            </Link>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+            
+            <div style={{minHeight: '80vh'}}> 
+                <Routes>
+                    {/* 🚨 RUTA PRINCIPAL: Ahora usa el Hero Banner, no el catálogo */}
+                    <Route path="/" element={<HeroPage />} /> 
+                    
+                    <Route path="/catalogo" element={<main><ListaProductos /></main>} />
+                    <Route path="/contacto" element={<Contacto />} />
+                    
+                    <Route 
+                        path="/producto/:id" 
+                        element={<ProductoDetalle addToCart={addToCart} />} 
+                    />
+                    
+                    <Route 
+                        path="/carrito" 
+                        element={<Carrito 
+                                    cart={cart}
+                                    totalPrice={totalPrice} 
+                                    removeFromCart={removeFromCart}
+                                    clearCart={clearCart}
+                                    addToCart={addToCart} 
+                                />} 
+                    /> 
+                </Routes>
+            </div>
+            
+            {/* ESTRUCTURA HTML BÁSICA PARA FOOTER */}
+            <footer className="footer">
+                <p>&copy; {new Date().getFullYear()} Hermanos Jota. Todos los derechos reservados.</p>
+            </footer>
+        </Router>
+    );
 }
 
 export default App;

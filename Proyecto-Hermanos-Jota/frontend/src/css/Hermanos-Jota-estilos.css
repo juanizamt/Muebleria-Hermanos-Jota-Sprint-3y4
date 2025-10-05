@@ -4,7 +4,8 @@
     --color-texto: #333;
     --color-btn: #8b5e47;
 }
-html,body {
+
+html, body {
     height: 100%;
 }
 
@@ -17,26 +18,25 @@ body {
     background-color: #fff;
     display: flex;
     flex-direction: column;
-    
 }
-main{
+
+main {
     flex: 1 0 auto;
 }
 
-    
-
-a:hover{
+a:hover {
     border-radius: 5px;
     background-color: #8b5e47;
     color: #ffff;
 }
-a:active{
+
+a:active {
     border-radius: 10px;
     background-color: #8b5e47;
     color: #fff;
 }
 
-a{
+a {
     color: #8b5e47;
     text-decoration: none;
     font-size: 1.2rem;
@@ -45,6 +45,7 @@ a{
 h1 {
     font-size: 1.5rem;
 }
+
 .hidden {
     display: none;
 }
@@ -52,7 +53,7 @@ h1 {
 /* ------------------- Header y navegación ------------------- */
 .header {
     display: flex;
-    justify-content: space-between; /* Esta propiedad es la que separa el logo del menú. */
+    justify-content: space-between;
     align-items: center;
     padding: 1rem;
     background-color: #e8e8e8;
@@ -60,8 +61,22 @@ h1 {
     height: 15vh;
 }
 
-.logo img {
-    height: 60px; /* Aquí le das tamaño al logo dentro del header */
+.header .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--color-texto);
+}
+
+.header .logo-container img {
+    height: 60px;
+    width: auto;
+}
+
+.header .logo-container h1 {
+    font-size: 1.5rem;
+    margin: 0;
 }
 
 .nav-menu ul {
@@ -70,8 +85,8 @@ h1 {
     margin: 0;
     display: flex;
     gap: 1rem;
-    align-items: center; /* Mejor 'center' para centrar verticalmente */
-    justify-content: flex-start; /* Esto alinea el menú dentro de su nav */
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .cart-icon {
@@ -80,7 +95,6 @@ h1 {
 
 /* ------------------- Hero Banner ------------------- */
 .hero-banner {
-    
     text-align: center;
     padding: 6rem 2rem;
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../assets/Fotos_hermanos_jota/hero_banner.png');
@@ -93,7 +107,6 @@ h1 {
     align-items: center;
     color: #fff;
     text-align: center;
-
 }
 
 .hero-content h1 {
@@ -108,10 +121,6 @@ h1 {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
-.btn:hover {
-    background-color: var(--color-principal);
-}
-
 /* ------------------- Botones y Formularios ------------------- */
 .btn {
     background-color: var(--color-btn);
@@ -122,7 +131,11 @@ h1 {
     transition: background-color 0.3s ease;
 }
 
-/* ------------------- Sección de productos destacados ------------------- */
+.btn:hover {
+    background-color: var(--color-principal);
+}
+
+/* ------------------- Sección de productos destacados (Catálogo) ------------------- */
 .featured-products {
     padding: 2rem 1rem;
     text-align: center;
@@ -132,9 +145,8 @@ h1 {
     margin-bottom: 2rem;
 }
 
-/* ESTILO CLAVE: Contenedor para la grilla de productos */
 .products-container {
-     display: grid;
+    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     padding: 1rem;
@@ -151,14 +163,11 @@ h1 {
     overflow: hidden;
     text-align: center;
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    /* Las siguientes 3 propiedades son para la disposición interna */
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    /* Propiedad clave para limitar el ancho de la tarjeta */
-    width: 100%; /* Por defecto en móvil */
-    max-width: 300px; /* Limite el tamaño de la tarjeta en escritorios */
+    width: 100%;
+    max-width: 300px;
     height: auto;
     max-height: auto;
 }
@@ -174,6 +183,16 @@ h1 {
     display: block;
 }
 
+.product-card .imagen-aleatoria-hero {
+    width: 100px;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/* ------------------- Footer ------------------- */
 .footer {
     background-color: var(--color-principal);
     color: #fff;
@@ -181,30 +200,9 @@ h1 {
     padding: 1rem;
     margin-top: 2rem;
     height: 10vh;
-
 }
 
-.producto-detalle {
-    background-color: #f5f5dc; /* Ligero color beige */
-    border: 1px solid #ddd; /* Un borde sutil */
-    border-radius: 8px; /* Bordes redondeados para la tarjeta */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar un efecto de elevación */
-    padding: 20px; /* Espacio interno */
-    margin-bottom: 20px; /* Espacio entre las tarjetas */
-    display: flexbox; /* Para que la imagen y el texto se acomoden uno al lado del otro */
-    flex-direction: column; /* Para que los elementos se apilen verticalmente */
-    align-items: center; /* Centra el contenido horizontalmente */
-    text-align: center; /* Centra el texto */
-    width: 25%;
-    max-height: 700px ;
-}
-
-.producto-detalle img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px; /* Para que la imagen también tenga los bordes redondeados */
-    margin-bottom: 15px; /* Espacio entre la imagen y el texto */
-}
+/* ------------------- Filtro / Búsqueda ------------------- */
 .catalogo-header {
     text-align: center;
     margin: 2rem 0;
@@ -214,9 +212,145 @@ h1 {
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 90%; 
+    width: 90%;
     max-width: 400px; 
 }
+
+/* ================================================= */
+/* VISTA DEL PRODUCTO ESPECÍFICO (ProductoDetalle.jsx) */
+/* ¡SOLUCIÓN FINAL: UNA SOLA DEFINICIÓN, CENTRADO FLEXBOX! */
+/* ================================================= */
+
+/* Contenedor principal de imagen e info (La tarjeta grande) */
+.producto-detalle {
+    display: flex; /* Diseño de dos columnas */
+    gap: 40px;
+    margin: 0 auto; /* Centra todo el bloque */
+    align-items: flex-start;
+    padding: 30px 20px;
+    /* Estilos estéticos opcionales que estaban en las versiones duplicadas */
+    background-color: #f5f5f5; /* Color sutil de fondo */
+    border-radius: 12px;
+    max-width: 1200px; 
+    min-width: 700px;
+}
+
+/* Columna que contiene la imagen */
+.image-column {
+    flex: 0 0 50%; /* Ocupa la mitad del espacio y no se comprime */
+    min-width: 400px; 
+    
+    /* 🚨 LA CLAVE DEL CENTRADO DE LA IMAGEN 🚨 */
+    display: flex; 
+    justify-content: center; /* Centra la imagen horizontalmente */
+}
+
+/* La imagen en sí */
+.producto-detalle-imagen {
+    width: 100%;
+    height: 450px; 
+    object-fit: cover; 
+    display: block;
+    border-radius: 12px; 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); 
+}
+
+/* Columna de la información (texto) */
+.info-column {
+    flex: 1 1 50%; /* Ocupa el resto del espacio */
+    padding: 20px 0;
+}
+
+/* Estilo para el botón de catálogo "Volver" */
+.catalogo-header a.btn {
+    text-decoration: none;
+    font-size: 0.9em;
+    padding: 8px 15px;
+}
+
+
+/* ================================================= */
+/* ESTILOS DEL CARRITO (Carrito.jsx)                 */
+/* ================================================= */
+
+/* Mensaje de confirmación (TOAST) */
+.cart-confirmation-message {
+    position: fixed;
+    top: 50px; 
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    font-size: 1.1em;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Contenedor principal del carrito */
+.cart-wrapper {
+    display: flex;
+    gap: 30px;
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Estilo para cada ítem individual en la lista del carrito */
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Estilo para la imagen dentro del ítem */
+.cart-item-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 15px;
+}
+
+/* Contenedor de la información del ítem (nombre y cantidad) */
+.cart-item-info {
+    flex-grow: 1;
+    padding-right: 20px;
+}
+
+/* Contenedor del precio unitario y subtotal del ítem */
+.cart-item-price {
+    text-align: right;
+    width: 150px;
+}
+
+/* Columna de resumen del pedido (a la derecha) */
+.cart-summary {
+    flex: 1;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    height: fit-content;
+}
+
+/* Fila para mostrar el subtotal y el total a pagar */
+.cart-total-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+}
+
+/* Estilo para el botón de catálogo cuando el carrito está vacío */
+.cart-empty-state {
+    padding: 40px;
+    text-align: center;
+}
+
 
 /* ------------------- Media Queries (Responsivo) ------------------- */
 /* Telefono */
@@ -241,140 +375,55 @@ h1 {
     .products-container {
         justify-content: space-between;
     }
-
-
-}
-.carrito-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  max-width: 800px;
-  margin: 0 auto;
 }
 
-.carrito-item-compacto {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.637);
-  background-color: #ffffff;
-  gap: 20px;
+/* ================================================= */
+/* ESTILOS DEL CARRITO (Botones y Mensajes)          */
+/* ================================================= */
+
+/* Contenedor principal del carrito */
+/* (Deja el resto de las clases .cart-wrapper, .cart-item, etc. que ya corregimos) */
+
+/* Botones + y - para la cantidad */
+.btn-qty-control {
+    background-color: #eee;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    min-width: 30px; /* Ancho fijo para que luzcan mejor */
 }
 
-.carrito-item-imagen {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 4px;
+/* Botón de Eliminar item individual */
+.btn-remove-item {
+    background-color: #ffdddd;
+    color: #cc0000;
+    border: 1px solid #cc0000;
+    padding: 5px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+.btn-remove-item:hover {
+    background-color: #cc0000;
+    color: white;
 }
 
-.item-info-compacto h4 {
-  margin: 0 0 5px;
-  font-size: 1.2em;
+/* Botón de Vaciar Carrito Completo */
+.btn-clear-cart {
+    background-color: #f44336; /* Rojo de peligro */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: fit-content;
+    display: block; /* Para que se separe de los items */
 }
-
-.item-info-compacto p {
-  margin: 0;
-  color: #777;
-}
-
-
-.resumen-compra {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  border-top: 2px solid #333;
-}
-
-.resumen-compra p {
-  font-size: 1.5em;
-  font-weight: bold;
-}
-
-.product-card .imagen-aleatoria-hero {
-    width: 100px; /* Tamaño de la imagen */
-    height: auto;
-    border-radius: 8px;
-    margin-top: 20px; /* Espacio entre el botón y la imagen */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.header .logo-container {
-    display: flex;
-    align-items: center; /* Centra la imagen y el texto verticalmente */
-    gap: 10px; /* Crea un espacio entre el logo y el texto */
-    text-decoration: none; /* Elimina el subrayado por defecto del enlace */
-    color: var(--color-texto);
-}
-
-.header .logo-container img {
-    height: 60px;
-}
-
-.header .logo-container h1 {
-    font-size: 1.5rem;
-    margin: 0; /* Elimina el margen por defecto del h1 */
-}
-
-.producto-detalle-imagen {
-    /* Altura máxima para que la imagen sea grande pero controlada */
-    max-height: 450px; 
-    /* Aseguramos que ocupe todo el ancho de su columna */
-    width: 100%; 
-    /* Le indicamos al navegador que mantenga la proporción y recorte si es necesario */
-    object-fit: cover; 
-    /* Forzamos la visualización, solo por seguridad */
-    display: block; 
-}
-
-/* Regla para el contenedor flex si es necesario un espacio */
-.producto-detalle {
-    /* Si tienes una regla display: flex; aquí, genial. */
-    align-items: flex-start; /* Asegura que la imagen no se comprima */
-}
-
-.producto-detalle .image-column-override {
-    min-width: 400px !important; 
-    flex-basis: 50% !important;
-}
-
-/* 🚨 1. ANCHO Y FLEX DEL CONTENEDOR PRINCIPAL (Para garantizar espacio) 🚨 */
-.producto-detalle {
-    /* Mantenemos el diseño Flexbox */
-    display: flex; 
-    /* Si el ancho total es muy pequeño, garantizamos un mínimo visible */
-    min-width: 700px; 
-    /* Centramos el contenido */
-    margin: 0 auto;
-    /* Ajustamos el padding para que no se pegue */
-    padding: 30px 20px;
-}
-
-/* 🚨 2. CONTROL TOTAL DE LA COLUMNA DE LA IMAGEN 🚨 */
-.producto-detalle .image-column {
-    /* Forzamos al 50% y prohibimos que se encoja o crezca */
-    flex: 0 0 50%; 
-    /* Si el 50% es muy poco, al menos tendrá este ancho */
-    min-width: 350px; 
-}
-
-/* 3. ESTILOS DE LA IMAGEN DENTRO DE LA COLUMNA */
-.producto-detalle-imagen {
-    width: 100%;
-    height: 450px; /* Altura que ya probamos que funciona */
-    object-fit: cover;
-    display: block; /* Necesario para que el width/height funcione bien */
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-/* 4. ESTILO DE LA COLUMNA DE INFORMACIÓN (para que ocupe el otro 50%) */
-.producto-detalle .info-column {
-    flex: 1 1 50%; 
-    padding-left: 20px;
+.btn-clear-cart:hover {
+    background-color: #d32f2f;
 }
