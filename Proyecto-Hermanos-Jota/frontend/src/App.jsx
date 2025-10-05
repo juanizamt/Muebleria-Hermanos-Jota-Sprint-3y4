@@ -2,8 +2,6 @@
 
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-
-// 🚨 IMPORTANTE: Se elimina la importación de Home.jsx
 import ListaProductos from './ListaProductos.jsx';
 import ProductoDetalle from './ProductoDetalle.jsx';
 import Carrito from './Carrito.jsx'; 
@@ -25,10 +23,10 @@ const HeroPage = () => (
 
 
 function App() {
-    // 1. ESTADO GLOBAL DEL CARRITO
+    // ESTADO GLOBAL DEL CARRITO
     const [cart, setCart] = useState([]); 
 
-    // 2. FUNCIONES DE GESTIÓN DEL CARRITO
+    // FUNCIONES DE GESTIÓN DEL CARRITO
     
     const addToCart = (productToAdd) => {
         const existingItem = cart.find(item => item.id === productToAdd.id);
@@ -68,7 +66,7 @@ function App() {
         setCart([]);
     };
 
-    // 3. CÁLCULO DE VALORES
+    // CÁLCULO DE VALORES
     const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
     const totalPrice = cart.reduce(
@@ -101,7 +99,7 @@ function App() {
             
             <div style={{minHeight: '80vh'}}> 
                 <Routes>
-                    {/* 🚨 RUTA PRINCIPAL: Ahora usa el Hero Banner, no el catálogo */}
+                    {/* RUTA PRINCIPAL: Ahora usa el Hero Banner, no el catálogo */}
                     <Route path="/" element={<HeroPage />} /> 
                     
                     <Route path="/catalogo" element={<main><ListaProductos /></main>} />

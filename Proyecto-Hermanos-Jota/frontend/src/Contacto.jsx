@@ -36,22 +36,22 @@ function Contacto() {
     };
 
     return (
-        <main className="featured-products contact-main-padded"> {/* 🚨 CLASE AÑADIDA */}
+        <main className="featured-products contact-main-padded"> 
             <h1 className="featured-title">Contactanos</h1>
-            <p className="contact-intro-text"> {/* 🚨 CLASE AÑADIDA */}
+            <p className="contact-intro-text">
                 Tenes alguna pregunta? Envíanos un mensaje.
             </p>
 
             {/* Mensaje de éxito visible */}
             {mensajeEnvio && (
-                <div className="success-message-box"> {/* 🚨 CLASE AÑADIDA */}
+                <div className="success-message-box"> 
                     {mensajeEnvio}
                 </div>
             )}
 
             
             <form 
-                className="contact-form" // 🚨 CLASE AÑADIDA
+                className="contact-form" 
                 onSubmit={handleSubmit} 
             >
                 {/* Campo Nombre */}
@@ -64,7 +64,7 @@ function Contacto() {
                         value={formData.nombre} 
                         onChange={handleChange}
                         required
-                        className="form-input-field" // 🚨 CLASE AÑADIDA
+                        className="form-input-field" 
                     />
                 </div>
 
@@ -78,11 +78,11 @@ function Contacto() {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="form-input-field" // 🚨 CLASE AÑADIDA
+                        className="form-input-field" 
                     />
                 </div>
                 
-                {/* Campo Teléfono (Opcional) */}
+                {/* Campo Teléfono */}
                 <div>
                     <label htmlFor="telefono">Teléfono:</label>
                     <input
@@ -91,7 +91,7 @@ function Contacto() {
                         name="telefono"
                         value={formData.telefono}
                         onChange={handleChange}
-                        className="form-input-field" // 🚨 CLASE AÑADIDA
+                        className="form-input-field" 
                     />
                 </div>
 
@@ -105,12 +105,12 @@ function Contacto() {
                         value={formData.mensaje}
                         onChange={handleChange}
                         required
-                        className="form-input-field" // 🚨 CLASE AÑADIDA
+                        className="form-input-field" 
                     ></textarea>
                 </div>
 
             
-                <button type="submit" className="btn btn-submit-margin"> {/* 🚨 CLASE AÑADIDA */}
+                <button type="submit" className="btn btn-submit-margin"> 
                     Enviar Consulta
                 </button>
             </form>

@@ -593,3 +593,29 @@ h1 {
 .cart-empty-state-margin-top {
     margin-top: 20px;
 }
+
+.search-bar-container {
+    width: 100%;
+    max-width: 600px; /* Limita el ancho del buscador */
+    margin: 20px auto 40px auto; /* Centrar y dar espacio */
+    padding: 10px;
+    background-color: var(--color-secundario); /* Fondo suave */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Estilo del input de texto */
+.search-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.search-input:focus {
+    border-color: var(--color-btn);
+    outline: none; /* Quitar el borde de foco predeterminado del navegador */
+}

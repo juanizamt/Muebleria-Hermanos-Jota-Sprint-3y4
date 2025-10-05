@@ -24,15 +24,15 @@ function Carrito({ cart, totalPrice, removeFromCart, clearCart, addToCart }) {
     if (compraExitosa) {
         return (
             <main className="cart-empty-state">
-                {/* 🚨 CLASE AÑADIDA */}
+                
                 <div className="cart-confirmation-message cart-confirmation-message-static"> 
-                    🎉 ¡Gracias por tu compra! El pedido ha sido procesado con éxito.
+                   ¡Gracias por tu compra! El pedido ha sido procesado con éxito.
                 </div>
                 <h2>🛒 Carrito de Compras</h2>
                 <hr />
-                {/* 🚨 CLASE AÑADIDA */}
+                
                 <p className="cart-empty-state-margin-top">Tu carrito está ahora vacío.</p>
-                {/* 🚨 CLASE AÑADIDA */}
+                
                 <Link to="/catalogo" className="btn cart-empty-state-margin-top">
                     Seguir Comprando
                 </Link>
@@ -47,7 +47,6 @@ function Carrito({ cart, totalPrice, removeFromCart, clearCart, addToCart }) {
                 <h2>🛒 Carrito de Compras</h2>
                 <hr />
                 <p>Tu carrito está vacío. ¡Empieza a llenarlo con nuestros increíbles productos!</p>
-                {/* 🚨 CLASE AÑADIDA */}
                 <Link to="/catalogo" className="btn cart-empty-state-margin-top">
                     Ver Catálogo
                 </Link>
@@ -59,11 +58,11 @@ function Carrito({ cart, totalPrice, removeFromCart, clearCart, addToCart }) {
     // ------------------- Renderizado de Carrito Lleno -------------------
 
     return (
-        <main className="cart-main-padded"> {/* 🚨 CLASE AÑADIDA */}
+        <main className="cart-main-padded">
             <h2>🛒 Tu Carrito</h2>
             <hr />
 
-            {/* 🚨 CLASE AÑADIDA */}
+            
             <div className="cart-columns"> 
                 
                 {/* COLUMNA DE ÍTEMS */}
@@ -98,11 +97,11 @@ function Carrito({ cart, totalPrice, removeFromCart, clearCart, addToCart }) {
                                 </div>
                             </div>
                             <div className="cart-item-price">
-                                {/* 🚨 CLASE AÑADIDA */}
+                                
                                 <p className="cart-item-price-total"> 
                                     $ {(item.precio * item.quantity).toFixed(2)}
                                 </p>
-                                {/* 🚨 CLASE AÑADIDA */}
+                                
                                 <p className="cart-item-price-unit">($ {item.precio.toFixed(2)} c/u)</p>
                             </div>
                         </div>
@@ -125,16 +124,16 @@ function Carrito({ cart, totalPrice, removeFromCart, clearCart, addToCart }) {
                         <p>${totalPrice}</p>
                     </div>
                     
-                    {/* 🚨 CLASE AÑADIDA */}
+                    
                     <div className="cart-total-row cart-total-row-no-border">
                         <h4>Total a Pagar:</h4>
-                        {/* 🚨 CLASE AÑADIDA */}
+                        
                         <h4 className="cart-final-total-color">$ {totalPrice}</h4>
                     </div>
                     
                     {/* Botón de Finalizar Compra */}
                     <button 
-                        className="btn btn-checkout" // 🚨 CLASE AÑADIDA
+                        className="btn btn-checkout" 
                         onClick={handleCheckout} 
                     >
                         Finalizar Compra
